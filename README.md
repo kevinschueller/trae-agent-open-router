@@ -14,7 +14,7 @@
 ## ✨ Features
 
 - 🌊 **Lakeview**: Provides short and concise summarisation for agent steps
-- 🤖 **Multi-LLM Support**: Works with OpenAI and Anthropic official APIs
+- 🤖 **Multi-LLM Support**: Works with OpenAI, Anthropic, OpenRouter, and Requesty APIs
 - 🛠️ **Rich Tool Ecosystem**: File editing, bash execution, sequential thinking, and more
 - 🎯 **Interactive Mode**: Conversational interface for iterative development
 - 📊 **Trajectory Recording**: Detailed logging of all agent actions for debugging and analysis
@@ -45,6 +45,12 @@ export OPENAI_API_KEY="your-openai-api-key"
 
 # For Anthropic
 export ANTHROPIC_API_KEY="your-anthropic-api-key"
+
+# For OpenRouter
+export OPENROUTER_API_KEY="your-openrouter-api-key"
+
+# For Requesty
+export REQUESTY_API_KEY="your-requesty-api-key"
 ```
 
 ### Basic Usage
@@ -128,6 +134,24 @@ Trae Agent uses a JSON configuration file (`trae_config.json`) for settings:
       "temperature": 0.5,
       "top_p": 1,
       "top_k": 0
+    },
+    "openrouter": {
+      "api_key": "your_openrouter_api_key",
+      "model": "anthropic/claude-3.5-sonnet",
+      "max_tokens": 4096,
+      "temperature": 0.5,
+      "top_p": 1,
+      "top_k": 0,
+      "max_retries": 3
+    },
+    "requesty": {
+      "api_key": "your_requesty_api_key",
+      "model": "openai/gpt-4o",
+      "max_tokens": 4096,
+      "temperature": 0.5,
+      "top_p": 1,
+      "top_k": 0,
+      "max_retries": 3
     }
   }
 }
@@ -143,6 +167,29 @@ Trae Agent uses a JSON configuration file (`trae_config.json`) for settings:
 
 - `OPENAI_API_KEY` - OpenAI API key
 - `ANTHROPIC_API_KEY` - Anthropic API key
+- `OPENROUTER_API_KEY` - OpenRouter API key
+- `REQUESTY_API_KEY` - Requesty API key
+- `REQUESTY_SITE_URL` - (Optional) Site URL for Requesty tracking
+- `REQUESTY_SITE_NAME` - (Optional) Site name for Requesty tracking
+
+### Additional LLM Providers
+
+Trae Agent supports additional LLM providers beyond the standard OpenAI and Anthropic APIs:
+
+#### OpenRouter
+OpenRouter provides access to multiple LLM models through a unified API. It supports various models from different providers including Anthropic, OpenAI, and others.
+
+- **Setup Guide**: See [OPENROUTER_SETUP.md](OPENROUTER_SETUP.md) for detailed configuration instructions
+- **API Key**: Get your API key from [OpenRouter](https://openrouter.ai/)
+- **Models**: Supports models like `anthropic/claude-3.5-sonnet`, `openai/gpt-4o`, and many others
+
+#### Requesty
+Requesty is an AI router that provides access to various LLM models with additional features like request tracking and analytics.
+
+- **Setup Guide**: See [REQUESTY_SETUP.md](REQUESTY_SETUP.md) for detailed configuration instructions
+- **API Key**: Get your API key from [Requesty](https://requesty.ai/)
+- **Models**: Supports models like `openai/gpt-4o`, `anthropic/claude-3.5-sonnet`, and others
+- **Features**: Optional request tracking with site URL and name headers
 
 ## 🛠️ Available Tools
 
@@ -212,6 +259,8 @@ For more details, see [TRAJECTORY_RECORDING.md](TRAJECTORY_RECORDING.md).
 - Python 3.12+
 - OpenAI API key (for OpenAI models)
 - Anthropic API key (for Anthropic models)
+- OpenRouter API key (for OpenRouter models)
+- Requesty API key (for Requesty models)
 
 ## 🔧 Troubleshooting
 
@@ -228,6 +277,8 @@ PYTHONPATH=. trae-cli run "your task"
 # Verify your API keys are set
 echo $OPENAI_API_KEY
 echo $ANTHROPIC_API_KEY
+echo $OPENROUTER_API_KEY
+echo $REQUESTY_API_KEY
 
 # Check configuration
 trae show-config
